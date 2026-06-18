@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detail Akun</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #050505;
+      --panel: #161616;
+      --panel-2: #1d1d1d;
+      --text: #f6f6f6;
+      --muted: #8f8f8f;
+      --accent: #ff8a00;
+      --accent-2: #ffb300;
+      --line: rgba(255, 255, 255, 0.06);
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(circle at top center, rgba(255, 138, 0, 0.08), transparent 24%),
+        linear-gradient(180deg, #070707 0%, #040404 100%);
+      color: var(--text);
+      font-family: Inter, system-ui, sans-serif;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url("IMG_7543.PNG") no-repeat left 10px top 8px / 128px auto;
+      opacity: 0.2;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .page {
+      width: min(1180px, calc(100vw - 40px));
+      margin: 0 auto;
+      padding: 48px 0 64px;
+      position: relative;
+    }
+
+    .title {
+      text-align: center;
+      margin-bottom: 34px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .title-banner {
+      width: min(100%, 1040px);
+      display: block;
+      margin: 0 auto;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.7));
+    }
+
+    .title .underline {
+      width: 82px;
+      height: 6px;
+      margin: 10px auto 0;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      border-radius: 999px;
+      box-shadow: 0 0 24px rgba(255, 138, 0, 0.5);
+    }
+
+    .panel {
+      width: min(100%, 1080px);
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .form {
+      display: grid;
+      gap: 14px 18px;
+      margin-bottom: 42px;
+    }
+
+    .row-2 {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 18px;
+    }
+
+    .field {
+      position: relative;
+    }
+
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 8px;
+      color: #fff;
+      font-family: Oswald, sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .label .required {
+      color: var(--accent);
+    }
+
+    .label .note {
+      color: var(--accent);
+      font-size: 12px;
+    }
+
+    .control,
+    .select,
+    .input {
+      width: 100%;
+      height: 44px;
+      border: 0;
+      outline: none;
+      color: #f8f8f8;
+      background: linear-gradient(180deg, #232323 0%, #1a1a1a 100%);
+      border-radius: 0;
+      padding: 0 18px;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+      clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 20px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+    }
+
+    .select,
+    .input {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .select {
+      appearance: none;
+      padding-right: 48px;
+      cursor: pointer;
+    }
+
+    .field.select-wrap::after {
+      content: "▾";
+      position: absolute;
+      right: 16px;
+      bottom: 14px;
+      color: rgba(255, 255, 255, 0.68);
+      pointer-events: none;
+      font-size: 14px;
+    }
+
+    .input::placeholder {
+      color: rgba(255, 255, 255, 0.22);
+    }
+
+    .packages {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 30px 14px;
+      padding-top: 14px;
+    }
+
+    .package {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      padding: 0;
+      cursor: pointer;
+      text-align: center;
+      font-family: inherit;
+    }
+
+    .package.is-active {
+      background: rgba(17, 17, 17, 0.95);
+      border: 1px solid rgba(255, 48, 48, 0.95);
+      border-radius: 16px;
+      box-shadow:
+        0 0 0 1px rgba(255, 48, 48, 0.18),
+        0 0 20px rgba(255, 48, 48, 0.42),
+        inset 0 0 18px rgba(255, 48, 48, 0.08);
+      padding: 10px 10px 12px;
+    }
+
+    .package .amount {
+      font-family: Oswald, sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #fff;
+      text-transform: uppercase;
+      min-height: 18px;
+    }
+
+    .package.is-active .amount {
+      color: var(--accent);
+    }
+
+    .custom-content {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .package.is-custom-active .custom-content {
+      display: flex;
+    }
+
+    .custom-input {
+      width: 88px;
+      height: 32px;
+      border-radius: 4px;
+      border: 1px solid #94b9ff;
+      background: #fff;
+      color: #222;
+      font-size: 14px;
+      padding: 0 10px;
+      outline: none;
+    }
+
+    .package.is-active .coin-wrap {
+      box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.45),
+        0 0 0 1px rgba(255, 48, 48, 0.65),
+        0 0 18px rgba(255, 48, 48, 0.38),
+        0 12px 24px rgba(255, 48, 48, 0.18);
+      transform: translateY(-2px) scale(1.03);
+    }
+
+    .package.is-active .price {
+      color: #8b8b8b;
+    }
+
+    .custom-price {
+      min-height: 16px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .coin-wrap {
+      width: 42px;
+      height: 42px;
+      margin: 10px auto 8px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 30% 30%, #ffe7a0 0%, #ffd54f 28%, #f6b400 62%, #d48700 100%);
+      box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.45),
+        0 8px 18px rgba(255, 165, 0, 0.14);
+      position: relative;
+    }
+
+    .coin-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 7px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 240, 180, 0.5);
+    }
+
+    .coin {
+      width: 16px;
+      height: 16px;
+      display: block;
+      position: relative;
+      z-index: 1;
+      color: #fff3b0;
+    }
+
+    .coin::before,
+    .coin::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: currentColor;
+      clip-path: polygon(50% 0%, 61% 34%, 98% 35%, 68% 57%, 79% 92%, 50% 71%, 21% 92%, 32% 57%, 2% 35%, 39% 34%);
+    }
+
+    .coin::after {
+      inset: 4px;
+      background: rgba(255, 220, 120, 0.95);
+      clip-path: polygon(50% 0%, 61% 34%, 98% 35%, 68% 57%, 79% 92%, 50% 71%, 21% 92%, 32% 57%, 2% 35%, 39% 34%);
+      transform: scale(0.8);
+      transform-origin: center;
+    }
+
+    .price {
+      color: #6f6f6f;
+      font-size: 12px;
+      line-height: 1.2;
+      min-height: 16px;
+    }
+
+    .package:hover .coin-wrap,
+    .package.is-active .coin-wrap {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.45),
+        0 0 0 1px rgba(255, 170, 0, 0.24),
+        0 12px 24px rgba(255, 165, 0, 0.18);
+    }
+
+    .cta-row {
+      margin-top: 34px;
+    }
+
+    .buy-button {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      padding: 0;
+      background: transparent;
+      color: #fff;
+      font-family: Oswald, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      box-shadow: 0 18px 30px rgba(255, 138, 0, 0.16);
+    }
+
+    .buy-button span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 132px;
+      height: 42px;
+      padding: 0 18px 0 22px;
+      background: linear-gradient(180deg, #ffa61b 0%, #ff8a00 100%);
+      clip-path: polygon(0 0, 92% 0, 100% 50%, 92% 100%, 0 100%, 8% 50%);
+    }
+
+    .buy-button:hover span {
+      filter: brightness(1.05);
+    }
+
+    .whatsapp {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 0;
+      background: #25d366;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+      display: grid;
+      place-items: center;
+      color: white;
+      text-decoration: none;
+      font-size: 22px;
+    }
+
+    .whatsapp img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 50%;
+    }
+
+    @media (max-width: 1100px) {
+      .packages {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .row-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        width: min(100vw - 24px, 100%);
+        padding-top: 34px;
+      }
+
+      .packages {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px 10px;
+      }
+
+      .title {
+        margin-bottom: 24px;
+      }
+
+      .title h1 {
+        font-size: 38px;
+      }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .title,
+      .form,
+      .packages,
+      .cta-row {
+        animation: rise 500ms ease both;
+      }
+
+      .packages {
+        animation-delay: 100ms;
+      }
+
+      .cta-row {
+        animation-delay: 180ms;
+      }
+
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="title">
+      <img class="title-banner" src="IMG_9081.PNG" alt="Banner detail akun" />
+    </section>
+
+    <section class="panel">
+      <form class="form" id="topupForm">
+        <div class="field">
+          <label class="label" for="micoId">ID MICO <span class="required">*</span></label>
+          <input class="input control" id="micoId" name="micoId" type="text" placeholder="ID MICO" />
+        </div>
+
+        <div class="row-2">
+          <div class="field select-wrap">
+            <label class="label" for="country">KODE NEGARA <span class="required">*</span></label>
+            <select class="select control" id="country" name="country">
+              <option>Indonesia (+62)</option>
+              <option>Malaysia (+60)</option>
+              <option>Singapore (+65)</option>
+              <option>Thailand (+66)</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label class="label" for="whatsapp">NO WHATSAPP <span class="note">NOTIFIKASI</span></label>
+            <input class="input control" id="whatsapp" name="whatsapp" type="tel" placeholder="08123456789" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label" for="referral">CODE REFERRAL</label>
+          <input class="input control" id="referral" name="referral" type="text" placeholder="Code Referral" />
+        </div>
+      </form>
+
+      <section class="packages" id="packages" aria-label="Daftar paket gold"></section>
+
+      <div class="cta-row">
+        <button class="buy-button" type="button"><span>BELI SEKARANG</span></button>
+      </div>
+    </section>
+  </main>
+
+  <a class="whatsapp" href="https://wa.me/628123456789" aria-label="Chat WhatsApp">
+    <img src="WA.png" alt="WhatsApp" />
+  </a>
+
+  <script>
+    const packages = [
+      ["200 G", "Rp 20,000"],
+      ["500 G", "Rp 50,000"],
+      ["1,000 G", "Rp 100,000"],
+      ["2,000 G", "Rp 200,000"],
+      ["3,000 G", "Rp 300,000"],
+      ["4,000 G", "Rp 400,000"],
+      ["5,000 G", "Rp 500,000"],
+      ["10,000 G", "Rp 1,000,000"],
+      ["15,000 G", "Rp 1,500,000"],
+      ["20,000 G", "Rp 2,000,000"],
+      ["25,000 G", "Rp 2,500,000"],
+      ["30,000 G", "Rp 3,000,000"],
+      ["50,000 G", "Rp 5,000,000"],
+      ["70,000 G", "Rp 7,000,000"],
+      ["100,000 G", "Rp 10,000,000"],
+      ["150,000 G", "Rp 15,000,000"],
+      ["200,000 G", "Rp 20,000,000"],
+      ["250,000 G", "Rp 25,000,000"],
+      ["300,000 G", "Rp 30,000,000"],
+      ["350,000 G", "Rp 35,000,000"],
+      ["400,000 G", "Rp 40,000,000"],
+      ["450,000 G", "Rp 45,000,000"],
+      ["500,000 G", "Rp 50,000,000"],
+      ["CUSTOM ORDER", "Rp 0"]
+    ];
+
+    const packagesContainer = document.getElementById('packages');
+    const customCoinPrice = 100;
+
+    const formatCurrency = (value) => `Rp ${new Intl.NumberFormat('id-ID').format(value)}`;
+
+    packages.forEach(([amount, price], index) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      const isCustom = amount === 'CUSTOM ORDER';
+      button.className = 'package' + (index === 0 ? ' is-active' : '') + (isCustom ? ' is-custom' : '');
+      button.innerHTML = isCustom
+        ? `
+          <div class="amount">${amount}</div>
+          <div class="coin-wrap"><span class="coin"></span></div>
+          <div class="custom-content">
+            <input class="custom-input" type="number" min="0" value="200" placeholder="200" aria-label="Nominal custom" />
+          </div>
+          <div class="price custom-price">${formatCurrency(200 * customCoinPrice)}</div>
+        `
+        : `
+          <div class="amount">${amount}</div>
+          <div class="coin-wrap"><span class="coin"></span></div>
+          <div class="price">${price}</div>
+        `;
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.package').forEach((item) => item.classList.remove('is-active'));
+        document.querySelectorAll('.package').forEach((item) => item.classList.remove('is-custom-active'));
+        button.classList.add('is-active');
+
+        const customCard = document.querySelector('.package.is-custom');
+        if (customCard) {
+          const shouldExpand = button === customCard;
+          customCard.classList.toggle('is-custom-active', shouldExpand);
+          if (shouldExpand) {
+            const input = customCard.querySelector('.custom-input');
+            const priceLabel = customCard.querySelector('.custom-price');
+            const syncCustomPrice = () => {
+              const coinAmount = Number(input?.value || 0);
+              if (priceLabel) {
+                priceLabel.textContent = formatCurrency(coinAmount * customCoinPrice);
+              }
+            };
+
+            syncCustomPrice();
+
+            if (input && !input.dataset.bound) {
+              input.addEventListener('input', syncCustomPrice);
+              input.dataset.bound = 'true';
+            }
+
+            if (input) {
+              setTimeout(() => input.focus(), 0);
+            }
+          }
+        }
+      });
+      packagesContainer.appendChild(button);
+    });
+
+    document.querySelector('.buy-button').addEventListener('click', () => {
+      const selected = document.querySelector('.package.is-active .amount')?.textContent || 'paket';
+      alert(`Paket ${selected} dipilih. Sambungkan aksi checkout sesuai kebutuhan Anda.`);
+    });
+  </script>
+</body>
+</html>
