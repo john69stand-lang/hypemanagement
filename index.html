@@ -255,49 +255,22 @@
       width: 42px;
       height: 42px;
       margin: 10px auto 8px;
-      border-radius: 50%;
       display: grid;
       place-items: center;
-      background:
-        radial-gradient(circle at 30% 30%, #ffe7a0 0%, #ffd54f 28%, #f6b400 62%, #d48700 100%);
-      box-shadow:
-        inset 0 2px 0 rgba(255, 255, 255, 0.45),
-        0 8px 18px rgba(255, 165, 0, 0.14);
       position: relative;
     }
 
-    .coin-wrap::before {
-      content: "";
-      position: absolute;
-      inset: 7px;
-      border-radius: 50%;
-      border: 2px solid rgba(255, 240, 180, 0.5);
+    .coin-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
 
-    .coin {
-      width: 16px;
-      height: 16px;
-      display: block;
-      position: relative;
-      z-index: 1;
-      color: #fff3b0;
-    }
-
+    .coin-wrap::before,
     .coin::before,
-    .coin::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: currentColor;
-      clip-path: polygon(50% 0%, 61% 34%, 98% 35%, 68% 57%, 79% 92%, 50% 71%, 21% 92%, 32% 57%, 2% 35%, 39% 34%);
-    }
-
-    .coin::after {
-      inset: 4px;
-      background: rgba(255, 220, 120, 0.95);
-      clip-path: polygon(50% 0%, 61% 34%, 98% 35%, 68% 57%, 79% 92%, 50% 71%, 21% 92%, 32% 57%, 2% 35%, 39% 34%);
-      transform: scale(0.8);
-      transform-origin: center;
+    .coin::after,
+    .coin {
+      display: none;
     }
 
     .price {
@@ -524,7 +497,7 @@
       button.innerHTML = isCustom
         ? `
           <div class="amount">${amount}</div>
-          <div class="coin-wrap"><span class="coin"></span></div>
+          <div class="coin-wrap"><img src="coin.png" alt="coin" /></div>
           <div class="custom-content">
             <input class="custom-input" type="number" min="0" max="499999" value="200" placeholder="200" aria-label="Nominal custom" />
           </div>
@@ -532,7 +505,7 @@
         `
         : `
           <div class="amount">${amount}</div>
-          <div class="coin-wrap"><span class="coin"></span></div>
+          <div class="coin-wrap"><img src="coin.png" alt="coin" /></div>
           <div class="price">${price}</div>
         `;
       button.addEventListener('click', () => {
