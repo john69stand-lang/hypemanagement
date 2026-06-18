@@ -6,791 +6,574 @@
   <title>Detail Akun</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --primary: #E63946;
-      --primary-dark: #D32F2F;
-      --primary-light: #FF6B6B;
-      --text-dark: #1a1a1a;
-      --text-light: #ffffff;
-      --bg: #f8f9fa;
-      --panel: #ffffff;
-      --muted: #6c757d;
-      --accent: #FFD700;
-      --shadow: 0 10px 30px rgba(230, 57, 70, 0.15);
-      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --bg: #050505;
+      --panel: #161616;
+      --panel-2: #1d1d1d;
+      --text: #f6f6f6;
+      --muted: #8f8f8f;
+      --accent: #ff8a00;
+      --accent-2: #ffb300;
+      --line: rgba(255, 255, 255, 0.06);
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
     }
 
     * {
-      margin: 0;
-      padding: 0;
       box-sizing: border-box;
     }
 
     html, body {
-      font-family: 'Poppins', sans-serif;
-      color: var(--text-dark);
-      background: var(--bg);
-      scroll-behavior: smooth;
+      margin: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(circle at top center, rgba(255, 138, 0, 0.08), transparent 24%),
+        linear-gradient(180deg, #070707 0%, #040404 100%);
+      color: var(--text);
+      font-family: Inter, system-ui, sans-serif;
     }
 
-    /* HEADER & NAVIGATION */
-    header {
-      background: var(--text-light);
-      box-shadow: var(--shadow-sm);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: url("IMG_7543.PNG") no-repeat center / cover;
+      opacity: 0.2;
+      pointer-events: none;
+      z-index: 0;
     }
 
-    nav {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 1.2rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: var(--primary);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .logo-icon {
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(135deg, var(--primary), var(--primary-light));
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 800;
-      font-size: 1.2rem;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-      align-items: center;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text-dark);
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-
-    .nav-links a:hover {
-      color: var(--primary);
-    }
-
-    .nav-links .cta-btn {
-      background: var(--primary);
-      color: white;
-      padding: 0.7rem 1.5rem;
-      border-radius: 8px;
-      transition: all 0.3s;
-    }
-
-    .nav-links .cta-btn:hover {
-      background: var(--primary-dark);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow);
-    }
-
-    /* HERO SECTION */
-    .hero {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      color: white;
-      padding: 5rem 2rem;
-      text-align: center;
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
       position: relative;
-      overflow: hidden;
     }
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -10%;
-      width: 500px;
-      height: 500px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
-      animation: float 6s ease-in-out infinite;
+    .page {
+      width: min(1180px, calc(100vw - 40px));
+      margin: 0 auto;
+      padding: 48px 0 64px;
+      position: relative;
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(30px); }
+    .title {
+      text-align: center;
+      margin-bottom: 34px;
+      position: relative;
+      z-index: 1;
     }
 
-    .hero-content {
-      max-width: 1200px;
+    .title-banner {
+      width: min(100%, 1040px);
+      display: block;
+      margin: 0 auto;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.7));
+    }
+
+    .title .underline {
+      width: 82px;
+      height: 6px;
+      margin: 10px auto 0;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      border-radius: 999px;
+      box-shadow: 0 0 24px rgba(255, 138, 0, 0.5);
+    }
+
+    .panel {
+      width: min(100%, 1080px);
       margin: 0 auto;
       position: relative;
       z-index: 1;
     }
 
-    .hero h1 {
-      font-size: 3.5rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
+    .form {
+      display: grid;
+      gap: 14px 18px;
+      margin-bottom: 42px;
+    }
+
+    .row-2 {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 18px;
+    }
+
+    .field {
+      position: relative;
+    }
+
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin: 0 0 8px;
+      color: #fff;
+      font-family: Oswald, sans-serif;
+      font-size: 13px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .label .required {
+      color: var(--accent);
+    }
+
+    .label .note {
+      color: var(--accent);
+      font-size: 12px;
+    }
+
+    .control,
+    .select,
+    .input {
+      width: 100%;
+      height: 44px;
+      border: 0;
+      outline: none;
+      color: #f8f8f8;
+      background: linear-gradient(180deg, #232323 0%, #1a1a1a 100%);
+      border-radius: 0;
+      padding: 0 18px;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+      clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 20px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+    }
+
+    .select,
+    .input {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .select {
+      appearance: none;
+      padding-right: 48px;
+      cursor: pointer;
+    }
+
+    .field.select-wrap::after {
+      content: "▾";
+      position: absolute;
+      right: 16px;
+      bottom: 14px;
+      color: rgba(255, 255, 255, 0.68);
+      pointer-events: none;
+      font-size: 14px;
+    }
+
+    .input::placeholder {
+      color: rgba(255, 255, 255, 0.22);
+    }
+
+    .packages {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 30px 14px;
+      padding-top: 14px;
+    }
+
+    .package {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      padding: 0;
+      cursor: pointer;
+      text-align: center;
+      font-family: inherit;
+    }
+
+    .package.is-active {
+      background: rgba(17, 17, 17, 0.95);
+      border: 1px solid rgba(255, 48, 48, 0.95);
+      border-radius: 16px;
+      box-shadow:
+        0 0 0 1px rgba(255, 48, 48, 0.18),
+        0 0 20px rgba(255, 48, 48, 0.42),
+        inset 0 0 18px rgba(255, 48, 48, 0.08);
+      padding: 10px 10px 12px;
+    }
+
+    .package .amount {
+      font-family: Oswald, sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #fff;
+      text-transform: uppercase;
+      min-height: 18px;
+    }
+
+    .package.is-active .amount {
+      color: var(--accent);
+    }
+
+    .custom-content {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .package.is-custom-active .custom-content {
+      display: flex;
+    }
+
+    .custom-input {
+      width: 88px;
+      height: 32px;
+      border-radius: 4px;
+      border: 1px solid #94b9ff;
+      background: #fff;
+      color: #222;
+      font-size: 14px;
+      padding: 0 10px;
+      outline: none;
+    }
+
+    .package.is-active .coin-wrap {
+      box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.45),
+        0 0 0 1px rgba(255, 48, 48, 0.65),
+        0 0 18px rgba(255, 48, 48, 0.38),
+        0 12px 24px rgba(255, 48, 48, 0.18);
+      transform: translateY(-2px) scale(1.03);
+    }
+
+    .package.is-active .price {
+      color: #8b8b8b;
+    }
+
+    .custom-price {
+      min-height: 16px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .coin-wrap {
+      width: 42px;
+      height: 42px;
+      margin: 10px auto 8px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 30% 30%, #ffe7a0 0%, #ffd54f 28%, #f6b400 62%, #d48700 100%);
+      box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.45),
+        0 8px 18px rgba(255, 165, 0, 0.14);
+      position: relative;
+    }
+
+    .coin-wrap::before {
+      content: "";
+      position: absolute;
+      inset: 7px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 240, 180, 0.5);
+    }
+
+    .coin {
+      width: 16px;
+      height: 16px;
+      display: block;
+      position: relative;
+      z-index: 1;
+      color: #fff3b0;
+    }
+
+    .coin::before,
+    .coin::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: currentColor;
+      clip-path: polygon(50% 0%, 61% 34%, 98% 35%, 68% 57%, 79% 92%, 50% 71%, 21% 92%, 32% 57%, 2% 35%, 39% 34%);
+    }
+
+    .coin::after {
+      inset: 4px;
+      background: rgba(255, 220, 120, 0.95);
+      clip-path: polygon(50% 0%, 61% 34%, 98% 35%, 68% 57%, 79% 92%, 50% 71%, 21% 92%, 32% 57%, 2% 35%, 39% 34%);
+      transform: scale(0.8);
+      transform-origin: center;
+    }
+
+    .price {
+      color: #6f6f6f;
+      font-size: 12px;
       line-height: 1.2;
+      min-height: 16px;
     }
 
-    .hero p {
-      font-size: 1.3rem;
-      margin-bottom: 2rem;
-      opacity: 0.95;
+    .package:hover .coin-wrap,
+    .package.is-active .coin-wrap {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow:
+        inset 0 2px 0 rgba(255, 255, 255, 0.45),
+        0 0 0 1px rgba(255, 170, 0, 0.24),
+        0 12px 24px rgba(255, 165, 0, 0.18);
     }
 
-    .hero-cta {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 2rem;
+    .cta-row {
+      margin-top: 34px;
     }
 
-    .btn {
-      padding: 1rem 2rem;
-      font-size: 1rem;
-      font-weight: 600;
-      border: none;
-      border-radius: 10px;
+    .buy-button {
+      appearance: none;
+      border: 0;
       cursor: pointer;
-      transition: all 0.3s;
-      text-decoration: none;
-      display: inline-block;
+      padding: 0;
+      background: transparent;
+      color: #fff;
+      font-family: Oswald, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      box-shadow: 0 18px 30px rgba(255, 138, 0, 0.16);
     }
 
-    .btn-primary {
-      background: var(--accent);
-      color: var(--text-dark);
-      box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 15px 35px rgba(255, 215, 0, 0.4);
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-      border: 2px solid white;
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.3);
-    }
-
-    /* VALUE PROPOSITIONS */
-    .features {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 5rem 2rem;
-    }
-
-    .features h2 {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 3rem;
-      color: var(--text-dark);
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-    }
-
-    .feature-card {
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      text-align: center;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.3s;
-      border-top: 4px solid var(--primary);
-    }
-
-    .feature-card:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow);
-    }
-
-    .feature-icon {
-      width: 60px;
-      height: 60px;
-      background: linear-gradient(135deg, var(--primary), var(--primary-light));
-      border-radius: 50%;
-      display: flex;
+    .buy-button span {
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 1rem;
-      font-size: 1.8rem;
+      min-width: 132px;
+      height: 42px;
+      padding: 0 18px 0 22px;
+      background: linear-gradient(180deg, #ffa61b 0%, #ff8a00 100%);
+      clip-path: polygon(0 0, 92% 0, 100% 50%, 92% 100%, 0 100%, 8% 50%);
     }
 
-    .feature-card h3 {
-      font-size: 1.2rem;
-      margin-bottom: 0.8rem;
-      color: var(--text-dark);
+    .buy-button:hover span {
+      filter: brightness(1.05);
     }
 
-    .feature-card p {
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    /* PRODUCTS SECTION */
-    .products {
-      background: linear-gradient(135deg, rgba(230, 57, 70, 0.05), rgba(230, 57, 70, 0.02));
-      padding: 5rem 2rem;
-    }
-
-    .products-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .products h2 {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      color: var(--text-dark);
-    }
-
-    .products-subtitle {
-      text-align: center;
-      color: var(--muted);
-      margin-bottom: 3rem;
-      font-size: 1.1rem;
-    }
-
-    .product-showcase {
-      background: white;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: 3rem;
-      padding: 3rem;
-    }
-
-    .product-image {
-      text-align: center;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      border-radius: 12px;
-      padding: 3rem;
-      color: white;
-    }
-
-    .product-image-icon {
-      font-size: 5rem;
-      margin-bottom: 1rem;
-      text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.4);
-      filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.6));
-      animation: coinGlow 2s ease-in-out infinite;
-    }
-
-    @keyframes coinGlow {
-      0%, 100% {
-        text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.4);
-      }
-      50% {
-        text-shadow: 0 0 30px rgba(255, 215, 0, 1), 0 0 50px rgba(255, 215, 0, 0.6);
-      }
-    }
-
-    .product-details h3 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: var(--text-dark);
-    }
-
-    .product-details p {
-      color: var(--muted);
-      line-height: 1.8;
-      margin-bottom: 1.5rem;
-      font-size: 1.05rem;
-    }
-
-    .product-features {
-      list-style: none;
-      margin-bottom: 2rem;
-    }
-
-    .product-features li {
-      padding: 0.7rem 0;
-      color: var(--text-dark);
-      display: flex;
-      gap: 0.8rem;
-      align-items: center;
-    }
-
-    .product-features li::before {
-      content: '✓';
-      color: var(--primary);
-      font-weight: 800;
-      font-size: 1.3rem;
-    }
-
-    /* FAQ SECTION */
-    .faq {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 5rem 2rem;
-    }
-
-    .faq h2 {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 3rem;
-      color: var(--text-dark);
-    }
-
-    .faq-container {
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .faq-item {
-      background: white;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      border-radius: 10px;
-      margin-bottom: 1rem;
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.3s;
-    }
-
-    .faq-item:hover {
-      box-shadow: var(--shadow);
-    }
-
-    .faq-question {
-      padding: 1.5rem;
-      background: white;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 600;
-      color: var(--text-dark);
-      user-select: none;
-      transition: all 0.3s;
-    }
-
-    .faq-question:hover {
-      background: rgba(230, 57, 70, 0.05);
-    }
-
-    .faq-toggle {
-      color: var(--primary);
-      font-size: 1.5rem;
-      transition: transform 0.3s;
-    }
-
-    .faq-item.active .faq-toggle {
-      transform: rotate(180deg);
-    }
-
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease;
-      padding: 0 1.5rem;
-    }
-
-    .faq-item.active .faq-answer {
-      max-height: 300px;
-      padding: 0 1.5rem 1.5rem;
-    }
-
-    .faq-answer p {
-      color: var(--muted);
-      line-height: 1.8;
-    }
-
-    /* CTA SECTION */
-    .cta-section {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      color: white;
-      padding: 4rem 2rem;
-      text-align: center;
-      border-radius: 16px;
-      margin: 3rem 2rem 0;
-    }
-
-    .cta-section h2 {
-      font-size: 2.2rem;
-      margin-bottom: 1rem;
-    }
-
-    .cta-section p {
-      font-size: 1.1rem;
-      margin-bottom: 2rem;
-      opacity: 0.95;
-    }
-
-    /* FOOTER */
-    footer {
-      background: var(--text-dark);
-      color: white;
-      padding: 3rem 2rem;
-      margin-top: 5rem;
-    }
-
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .footer-section h4 {
-      color: var(--primary);
-      margin-bottom: 1rem;
-      font-size: 1.1rem;
-    }
-
-    .footer-section ul {
-      list-style: none;
-    }
-
-    .footer-section ul li {
-      margin-bottom: 0.8rem;
-    }
-
-    .footer-section a {
-      color: rgba(255, 255, 255, 0.7);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-
-    .footer-section a:hover {
-      color: var(--primary);
-    }
-
-    .social-links {
-      display: flex;
-      gap: 1.5rem;
-      margin-top: 1rem;
-    }
-
-    .social-links a {
-      width: 40px;
-      height: 40px;
-      background: var(--primary);
+    .whatsapp {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      width: 46px;
+      height: 46px;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      transition: all 0.3s;
+      border: 0;
+      background: #25d366;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+      display: grid;
+      place-items: center;
+      color: white;
       text-decoration: none;
+      font-size: 22px;
     }
 
-    .social-links a:hover {
-      background: var(--primary-light);
-      transform: translateY(-3px);
+    .whatsapp img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border-radius: 50%;
     }
 
-    .footer-bottom {
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      padding-top: 2rem;
-      text-align: center;
-      color: rgba(255, 255, 255, 0.6);
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 2.2rem;
+    @media (max-width: 1100px) {
+      .packages {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
       }
 
-      .hero p {
-        font-size: 1rem;
-      }
-
-      .product-showcase {
+      .row-2 {
         grid-template-columns: 1fr;
-        padding: 1.5rem;
-      }
-
-      .nav-links {
-        gap: 1rem;
-      }
-
-      .nav-links a {
-        font-size: 0.9rem;
-      }
-
-      .features h2,
-      .products h2,
-      .faq h2 {
-        font-size: 1.8rem;
       }
     }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
+    @media (max-width: 760px) {
+      .page {
+        width: min(100vw - 24px, 100%);
+        padding-top: 34px;
+      }
+
+      .packages {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px 10px;
+      }
+
+      .title {
+        margin-bottom: 24px;
+      }
+
+      .title h1 {
+        font-size: 38px;
+      }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .title,
+      .form,
+      .packages,
+      .cta-row {
+        animation: rise 500ms ease both;
+      }
+
+      .packages {
+        animation-delay: 100ms;
+      }
+
+      .cta-row {
+        animation-delay: 180ms;
+      }
+
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
     }
   </style>
 </head>
 <body>
+  <main class="page">
+    <section class="title">
+      <img class="title-banner" src="IMG_9109.PNG" alt="Banner detail akun" />
+    </section>
 
-<!-- HEADER -->
-<header>
-  <nav>
-    <a href="#" class="logo">
-      <div class="logo-icon">H</div>
-      HypeManagement
-    </a>
-    <ul class="nav-links">
-      <li><a href="#features">Keunggulan</a></li>
-      <li><a href="#products">Produk</a></li>
-      <li><a href="#faq">FAQ</a></li>
-      <li><a href="#" class="cta-btn">Login</a></li>
-    </ul>
-  </nav>
-</header>
+    <section class="panel">
+      <form class="form" id="topupForm">
+        <div class="field">
+          <label class="label" for="micoId">ID MICO <span class="required">*</span></label>
+          <input class="input control" id="micoId" name="micoId" type="text" placeholder="ID MICO" />
+        </div>
 
-<!-- HERO SECTION -->
-<section class="hero">
-  <div class="hero-content">
-    <h1>Top Up Mico Gold Tercepat & Terpercaya</h1>
-    <p>Upgrade coin Mico Live Anda dengan harga terbaik dan proses instant. Ribuan streamer puas melayani Anda!</p>
-    <div class="hero-cta">
-      <a href="#products" class="btn btn-primary">Top Up Sekarang</a>
-      <a href="#" class="btn btn-secondary">Hubungi Support</a>
-    </div>
-  </div>
-</section>
+        <div class="row-2">
+          <div class="field select-wrap">
+            <label class="label" for="country">KODE NEGARA <span class="required">*</span></label>
+            <select class="select control" id="country" name="country">
+              <option>Indonesia (+62)</option>
+              <option>Malaysia (+60)</option>
+              <option>Singapore (+65)</option>
+              <option>Thailand (+66)</option>
+            </select>
+          </div>
 
-<!-- FEATURES / VALUE PROPOSITIONS -->
-<section class="features" id="features">
-  <h2>Mengapa Pilih HypeManagement?</h2>
-  <div class="features-grid">
-    <div class="feature-card">
-      <div class="feature-icon">⚡</div>
-      <h3>Proses Cepat</h3>
-      <p>Transaksi top up mico gold Anda diproses dalam hitungan detik. Tanpa antri, tanpa ribet!</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">💰</div>
-      <h3>Harga Murah</h3>
-      <p>Dapatkan harga terbaik untuk setiap coin mico live. Hemat lebih banyak, upgrade tanpa beban!</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🔒</div>
-      <h3>Transaksi Aman</h3>
-      <p>Sistem enkripsi tingkat tinggi menjamin keamanan data dan dana Anda 100% terlindungi.</p>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">👥</div>
-      <h3>Support 24/7</h3>
-      <p>Tim customer service kami siap membantu Anda kapan saja. Chat langsung via WhatsApp tersedia!</p>
-    </div>
-  </div>
-</section>
+          <div class="field">
+            <label class="label" for="whatsapp">NO WHATSAPP <span class="note">NOTIFIKASI</span></label>
+            <input class="input control" id="whatsapp" name="whatsapp" type="tel" placeholder="08123456789" />
+          </div>
+        </div>
 
-<!-- PRODUCTS SECTION -->
-<section class="products" id="products">
-  <div class="products-container">
-    <h2>Top Up Mico Gold</h2>
-    <p class="products-subtitle">Tingkatkan performa live streaming Anda dengan coin Mico Live original dari HypeManagement</p>
-    
-    <div class="product-showcase">
-      <div class="product-image">
-        <div class="product-image-icon">⭐</div>
-        <h4 style="font-size: 1.5rem; margin-top: 1rem;">MICO GOLD</h4>
-        <p style="margin-top: 1rem; opacity: 0.9;">Top Up Langsung ke Akun Anda</p>
+        <div class="field">
+          <label class="label" for="referral">CODE REFERRAL</label>
+          <input class="input control" id="referral" name="referral" type="text" placeholder="Code Referral" />
+        </div>
+      </form>
+
+      <section class="packages" id="packages" aria-label="Daftar paket gold"></section>
+
+      <div class="cta-row">
+        <button class="buy-button" type="button"><span>BELI SEKARANG</span></button>
       </div>
-      <div class="product-details">
-        <h3>Paket Top Up Mico Gold</h3>
-        <p>Kami menyediakan berbagai pilihan paket coin Mico Live dengan nominal yang fleksibel sesuai kebutuhan Anda. Mulai dari paket kecil hingga premium, semua tersedia dengan harga kompetitif!</p>
-        <ul class="product-features">
-          <li>Coin langsung masuk ke akun</li>
-          <li>Proses verifikasi instan</li>
-          <li>Tersedia 24/7 tanpa tutup</li>
-          <li>Garansi uang kembali jika ada masalah</li>
-          <li>Bonus untuk pembelian paket besar</li>
-          <li>Riwayat transaksi lengkap dan transparan</li>
-        </ul>
-        <a href="#" class="btn btn-primary">Mulai Top Up</a>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
+  </main>
 
-<!-- FAQ SECTION -->
-<section class="faq" id="faq">
-  <h2>Pertanyaan yang Sering Diajukan</h2>
-  <div class="faq-container">
-    
-    <div class="faq-item">
-      <div class="faq-question">
-        <span>Berapa lama proses top up coin mico?</span>
-        <span class="faq-toggle">▼</span>
-      </div>
-      <div class="faq-answer">
-        <p>Proses top up coin Mico Gold biasanya hanya membutuhkan waktu 1-5 menit. Coin akan langsung masuk ke akun Mico Live Anda setelah pembayaran berhasil diverifikasi.</p>
-      </div>
-    </div>
+  <a class="whatsapp" href="https://wa.me/628123456789" aria-label="Chat WhatsApp">
+    <img src="whatsapp_logo_icon_147205.png" alt="WhatsApp" />
+  </a>
 
-    <div class="faq-item">
-      <div class="faq-question">
-        <span>Metode pembayaran apa yang tersedia?</span>
-        <span class="faq-toggle">▼</span>
-      </div>
-      <div class="faq-answer">
-        <p>Kami menerima berbagai metode pembayaran termasuk Transfer Bank (BCA, BRI, Mandiri, BNI), E-wallet (GCash, Dana, OVO), dan Virtual Account untuk kemudahan Anda.</p>
-      </div>
-    </div>
+  <script>
+    const packages = [
+      ["200 G", "Rp 20,000"],
+      ["500 G", "Rp 50,000"],
+      ["1,000 G", "Rp 100,000"],
+      ["2,000 G", "Rp 200,000"],
+      ["3,000 G", "Rp 300,000"],
+      ["4,000 G", "Rp 400,000"],
+      ["5,000 G", "Rp 500,000"],
+      ["10,000 G", "Rp 1,000,000"],
+      ["15,000 G", "Rp 1,500,000"],
+      ["20,000 G", "Rp 2,000,000"],
+      ["25,000 G", "Rp 2,500,000"],
+      ["30,000 G", "Rp 3,000,000"],
+      ["50,000 G", "Rp 5,000,000"],
+      ["70,000 G", "Rp 7,000,000"],
+      ["100,000 G", "Rp 10,000,000"],
+      ["150,000 G", "Rp 15,000,000"],
+      ["200,000 G", "Rp 20,000,000"],
+      ["250,000 G", "Rp 25,000,000"],
+      ["300,000 G", "Rp 30,000,000"],
+      ["350,000 G", "Rp 35,000,000"],
+      ["400,000 G", "Rp 40,000,000"],
+      ["450,000 G", "Rp 45,000,000"],
+      ["500,000 G", "Rp 50,000,000"],
+      ["CUSTOM ORDER", "Rp 0"]
+    ];
 
-    <div class="faq-item">
-      <div class="faq-question">
-        <span>Bagaimana jika transaksi saya gagal?</span>
-        <span class="faq-toggle">▼</span>
-      </div>
-      <div class="faq-answer">
-        <p>Jika transaksi gagal, uang Anda akan dikembalikan ke rekening asal Anda secara otomatis. Jika ada kendala, hubungi tim support kami dan kami akan membantu proses refund Anda segera.</p>
-      </div>
-    </div>
+    const packagesContainer = document.getElementById('packages');
+    const customCoinPrice = 100;
 
-    <div class="faq-item">
-      <div class="faq-question">
-        <span>Apakah aman melakukan top up di HypeManagement?</span>
-        <span class="faq-toggle">▼</span>
-      </div>
-      <div class="faq-answer">
-        <p>Ya, 100% aman! Kami menggunakan sistem enkripsi SSL dan teknologi keamanan terkini. Data pribadi dan transaksi Anda terlindungi sepenuhnya. Kami juga memiliki lisensi resmi dan sertifikasi keamanan internasional.</p>
-      </div>
-    </div>
+    const formatCurrency = (value) => `Rp ${new Intl.NumberFormat('id-ID').format(value)}`;
 
-    <div class="faq-item">
-      <div class="faq-question">
-        <span>Ada diskon atau promo khusus?</span>
-        <span class="faq-toggle">▼</span>
-      </div>
-      <div class="faq-answer">
-        <p>Tentu saja! Kami secara rutin memberikan promo dan bonus menarik untuk member setia kami. Follow media sosial kami untuk mendapatkan informasi promo terbaru.</p>
-      </div>
-    </div>
+    packages.forEach(([amount, price], index) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      const isCustom = amount === 'CUSTOM ORDER';
+      button.className = 'package' + (index === 0 ? ' is-active' : '') + (isCustom ? ' is-custom' : '');
+      button.innerHTML = isCustom
+        ? `
+          <div class="amount">${amount}</div>
+          <div class="coin-wrap"><span class="coin"></span></div>
+          <div class="custom-content">
+            <input class="custom-input" type="number" min="0" value="200" placeholder="200" aria-label="Nominal custom" />
+          </div>
+          <div class="price custom-price">${formatCurrency(200 * customCoinPrice)}</div>
+        `
+        : `
+          <div class="amount">${amount}</div>
+          <div class="coin-wrap"><span class="coin"></span></div>
+          <div class="price">${price}</div>
+        `;
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.package').forEach((item) => item.classList.remove('is-active'));
+        document.querySelectorAll('.package').forEach((item) => item.classList.remove('is-custom-active'));
+        button.classList.add('is-active');
 
-  </div>
-</section>
+        const customCard = document.querySelector('.package.is-custom');
+        if (customCard) {
+          const shouldExpand = button === customCard;
+          customCard.classList.toggle('is-custom-active', shouldExpand);
+          if (shouldExpand) {
+            const input = customCard.querySelector('.custom-input');
+            const priceLabel = customCard.querySelector('.custom-price');
+            const syncCustomPrice = () => {
+              const coinAmount = Number(input?.value || 0);
+              if (priceLabel) {
+                priceLabel.textContent = formatCurrency(coinAmount * customCoinPrice);
+              }
+            };
 
-<!-- CTA SECTION -->
-<section class="cta-section" style="margin-left: auto; margin-right: auto; width: calc(100% - 4rem);">
-  <h2>Siap untuk Upgrade Pengalaman Live Streaming Anda?</h2>
-  <p>Bergabunglah dengan ribuan streamer yang telah mempercayai HypeManagement</p>
-  <a href="#" class="btn btn-primary">Top Up Sekarang</a>
-</section>
+            syncCustomPrice();
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-content">
-    <div class="footer-section">
-      <h4>Tentang HypeManagement</h4>
-      <p style="color: rgba(255, 255, 255, 0.7); line-height: 1.6;">HypeManagement adalah platform terpercaya untuk top up coin Mico Live dengan harga terbaik dan layanan terbaik.</p>
-      <div class="social-links">
-        <a href="https://wa.me/your_number" title="WhatsApp">💬</a>
-        <a href="https://www.instagram.com/hypemgmt" title="Instagram">📷</a>
-        <a href="https://www.tiktok.com/@hypemgmt" title="TikTok">🎵</a>
-      </div>
-    </div>
+            if (input && !input.dataset.bound) {
+              input.addEventListener('input', syncCustomPrice);
+              input.dataset.bound = 'true';
+            }
 
-    <div class="footer-section">
-      <h4>Navigasi</h4>
-      <ul>
-        <li><a href="#features">Keunggulan</a></li>
-        <li><a href="#products">Produk</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="#">Order Status</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-section">
-      <h4>Kontak & Dukungan</h4>
-      <ul>
-        <li><a href="https://wa.me/your_number">WhatsApp Support</a></li>
-        <li><a href="mailto:support@hypemgmt.com">Email Support</a></li>
-        <li><a href="#">Hubungi Kami</a></li>
-        <li><a href="#">Live Chat</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-section">
-      <h4>Legal</h4>
-      <ul>
-        <li><a href="#">Kebijakan Privasi</a></li>
-        <li><a href="#">Syarat & Ketentuan</a></li>
-        <li><a href="#">Kebijakan Layanan</a></li>
-        <li><a href="#">Disclaimer</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="footer-bottom">
-    <p>&copy; 2024 HypeManagement. All rights reserved. | Top Up Mico Gold Terpercaya</p>
-  </div>
-</footer>
-
-<script>
-  // FAQ Toggle Functionality
-  const faqItems = document.querySelectorAll('.faq-item');
-  
-  faqItems.forEach(item => {
-    const question = item.querySelector('.faq-question');
-    question.addEventListener('click', () => {
-      // Close other items
-      faqItems.forEach(otherItem => {
-        if (otherItem !== item) {
-          otherItem.classList.remove('active');
+            if (input) {
+              setTimeout(() => input.focus(), 0);
+            }
+          }
         }
       });
-      // Toggle current item
-      item.classList.toggle('active');
+      packagesContainer.appendChild(button);
     });
-  });
 
-  // Smooth scroll for navigation links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      const href = this.getAttribute('href');
-      if (href !== '#' && document.querySelector(href)) {
-        e.preventDefault();
-        document.querySelector(href).scrollIntoView({
-          behavior: 'smooth'
-        });
-      }
+    document.querySelector('.buy-button').addEventListener('click', () => {
+      const selected = document.querySelector('.package.is-active .amount')?.textContent || 'paket';
+      alert(`Paket ${selected} dipilih. Sambungkan aksi checkout sesuai kebutuhan Anda.`);
     });
-  });
-
-  // Open first FAQ by default
-  if (faqItems.length > 0) {
-    faqItems[0].classList.add('active');
-  }
-</script>
-
+  </script>
 </body>
 </html>
